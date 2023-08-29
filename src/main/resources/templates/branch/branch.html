@@ -28,7 +28,7 @@
                 <td th:text="${branch.responsible}"></td>
                 <td th:text="${branch.cnpj}"></td>
                 <td>
-                    <a class="action-link" th:href="@{/atualizar/{branchId}(branchId=${branch.id})}">
+                    <a class="action-link" th:href="@{/atualizar-filial/{branchId}(branchId=${branch.id})}">
                         <i class="fas fa-pencil-alt"></i>
                     </a>
                     <a class="action-link" th:href="@{/excluir-branch/{branchId}(branchId=${branch.id})}" onclick="return confirm('Tem certeza que deseja excluir?')">
