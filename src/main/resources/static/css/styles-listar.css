@@ -1,12 +1,12 @@
 h1{
-    color: #cf9cd5;
+    color: white;
 }
 h2{
-    color: white;
+    color: #9e9e9e;
 }
 
 body{
-    background-color: #312034;
+    background-color: #002855;
 }
 
 #branch {
@@ -38,12 +38,12 @@ body{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #8810c2;
+    background-color: #00a79d;
     color: white;
 }
 
 button.add-button{
-    background-color: #8810c2; /* Green */
+    background-color: #00a79d;
     border: 1px #cccccc;
     color: white;
     padding: 14px 40px;
@@ -66,14 +66,14 @@ div {
 }
 
 .action-link {
-    color: #8810c2;
+    color: #00a79d;
     text-decoration: none;
     margin-right: 10px;
     font-size: 18px;
 }
 
 .action-link:hover {
-    color: #8e079f;
+    color: #00a79d;
 }
 
 .logo-container {
@@ -81,8 +81,32 @@ div {
     align-items: center; /* Centraliza verticalmente */
 }
 
-/* Estilos para a imagem da logo */
-.logo {
-    width: 100px; /* Largura desejada da logo */
-    height: auto; /* Mantém a proporção da imagem */
+
+.div-menu{
+}
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-menu li {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.nav-menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #00a79d;
+}
+
+.nav-menu li a:hover {
+    background-color: #0a544f;
+    color: #fff;
 }

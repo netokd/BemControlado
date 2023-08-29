@@ -16,7 +16,7 @@ public class BranchController {
         this.branchRepository = branchRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/filial")
     public String branch(Model model){
         List<Branch> branch = branchRepository.findAll();
         model.addAttribute("branchList", branch);
