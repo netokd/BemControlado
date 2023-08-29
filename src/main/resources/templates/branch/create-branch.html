@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Filial</title>
+    <link   rel="stylesheet" href="/css/styles-create.css">
+</head>
+<body>
+<h1>Adicionar Filial</h1>
+<div class="div-form">
+    <form onsubmit="addCustomerJson(); return false;">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="address">Endereço:</label>
+        <input type="text" id="address" name="address" required><br>
+
+        <label for="responsible">Responsavel:</label>
+        <input type="text" id="responsible" name="responsible" required><br>
+
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" name="cnpj" required><br>
+
+        <button class="submit-button" type="button" onclick="addCustomer()">Adicionar Cliente</button>
+    </form>
+</div>
+
+<script>
+    function addCustomer() {
+        var name = document.getElementById('name').value;
+        var address = document.getElementById('address').value;
+        var responsible = (document.getElementById('responsible').value); // Certifique-se de converter para um número inteiro
+        var cnpj = document.getElementById('cnpj').value;
+
+        var customer = {
+            name: name,
+            address: address,
+            responsible: responsible,
+            cnpj: cnpj
+        };
+
+        fetch('/api/v1/branch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(customer)
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/filial'; // Redireciona para a página de listagem
+                }
+            })
+            .catch(error => console.error('Erro ao adicionar cliente', error));
+    }
+</script>
+
+</body>
+</html>

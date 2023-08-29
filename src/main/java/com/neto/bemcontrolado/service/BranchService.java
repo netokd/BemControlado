@@ -39,8 +39,8 @@ public class BranchService {
         branchRepository.save(branch);
     }
 
-    @DeleteMapping("{branchId} ")
-    public void deleteCustomer(@PathVariable("branchId") Integer id){
+    @DeleteMapping("/{branchId} ")
+    public void deleteBranch(@PathVariable("branchId") Integer id){
         branchRepository.deleteById(id);
     }
 
