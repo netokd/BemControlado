@@ -1,0 +1,88 @@
+h1{
+    color: #cf9cd5;
+}
+h2{
+    color: white;
+}
+
+body{
+    background-color: #312034;
+}
+
+#branch {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#branch td, #branch th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#branch tr.odd{
+    background-color: #f2f2f2;
+}
+
+#branch tr.even{
+    background-color: #fff;
+}
+
+#branch tr:hover {
+    background-color: #ddd;
+}
+
+
+
+#branch th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #8810c2;
+    color: white;
+}
+
+button.add-button{
+    background-color: #8810c2; /* Green */
+    border: 1px #cccccc;
+    color: white;
+    padding: 14px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+a.add-button{
+    color:white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.action-link {
+    color: #8810c2;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.action-link:hover {
+    color: #8e079f;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Estilos para a imagem da logo */
+.logo {
+    width: 100px; /* Largura desejada da logo */
+    height: auto; /* Mantém a proporção da imagem */
+}

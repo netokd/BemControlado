@@ -1,0 +1,27 @@
+
+server:
+  port: 8080
+
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5332/bemcontrolado
+    username: root
+    password: root123
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+
+  main:
+    web-application-type: servlet

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BemMonitorado</title>
+    <!-- Coloque seus estilos CSS, links para folhas de estilo, etc. aqui -->
+</head>
+<body>
+<header>
+
+    <!-- Menu de navegação -->
+    <nav>
+        <ul class="nav-menu">
+            <li><a th:href="@{/branch}">Branch</a></li>
+            <li><a th:href="@{/inventory}">Inventory</a></li>
+            <li><a th:href="@{/category}">Category</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Inclua o conteúdo específico de cada página -->
+<div class="content">
+    <!-- O conteúdo da página será injetado aqui -->
+    <div th:insert="${contentFragment}"></div>
+</div>
+
+<!-- Inclua o footer -->
+<footer>
+    <!-- Conteúdo do footer aqui -->
+</footer>
+
+<!-- Coloque seus scripts JavaScript, links para arquivos .js, etc. aqui -->
+</body>
+</html>

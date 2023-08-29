@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/styles-listar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Coloque seus estilos CSS, links para folhas de estilo, etc. aqui -->
+</head>
+<body>
+<!-- Define o fragmento "contentFragment" para o conteúdo da página -->
+<div th:fragment="contentFragment">
+    <!-- Inclua o fragmento de conteúdo -->
+    <div th:include="branch-content :: branch-content"></div>
+</div>
+
+<!-- Inclui o template de layout -->
+<div th:replace="layout :: layout"></div>
+
+<!-- Coloque seus scripts JavaScript, links para arquivos .js, etc. aqui -->
+</body>
+</html>
