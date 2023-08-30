@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Categoria</title>
+    <link   rel="stylesheet" href="/css/styles-create.css">
+</head>
+<body>
+<h1>Adicionar Categoria</h1>
+<div class="div-form">
+    <form onsubmit="addCategoryJson(); return false;">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <button class="submit-button" type="button" onclick="addCategory()">Adicionar Cliente</button>
+    </form>
+</div>
+
+<script>
+    function addCategory() {
+        var name = document.getElementById('name').value;
+
+        var category = {
+            name: name
+        };
+
+        fetch('/api/v1/category', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(category)
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/categoria'; // Redireciona para a página de listagem
+                }
+            })
+            .catch(error => console.error('Erro ao adicionar categoria', error));
+    }
+</script>
+
+</body>
+</html>

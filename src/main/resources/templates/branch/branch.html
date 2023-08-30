@@ -17,9 +17,9 @@
         <table id="branch">
             <tr>
                 <th>Nome</th>
-                <th>Email</th>
-                <th>Idade</th>
-                <th>Ações</th>
+                <th>Endereço</th>
+                <th>Responsável</th>
+                <th>CNPJ</th>
                 <th>Ações</th>
             </tr>
             <tr  th:each="branch, iterStat : ${branchList}" th:class="${iterStat.even} ? 'even' : 'odd'">

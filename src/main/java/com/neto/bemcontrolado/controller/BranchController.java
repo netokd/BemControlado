@@ -56,7 +56,7 @@ public class BranchController {
     public String updateBranch(@PathVariable Integer branchId, @ModelAttribute Branch updatedBranch) {
         // Busque o cliente existente pelo ID
         Branch existingBranch = branchRepository.findById(branchId)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Filial não encontrado"));
 
         // Atualize os dados do cliente existente com os dados do formulário
         existingBranch.setName(updatedBranch.getName());

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Filial</title>
+    <link   rel="stylesheet" href="/css/styles-create.css">
+</head>
+<body>
+<h1>Adicionar Filial</h1>
+<div class="div-form">
+    <form th:object="${category}" th:action="@{/atualizar-categoria/{categoryId}(categoryId=${category.id})}" method="post">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name"  th:field="*{name}" required><br>
+
+        <button class="submit-button" type="submit" >Atualizar Categoria</button>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>
+
+
