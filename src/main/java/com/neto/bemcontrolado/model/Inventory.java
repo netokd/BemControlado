@@ -1,5 +1,6 @@
 package com.neto.bemcontrolado.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class Inventory {
     @ManyToOne
     @JoinColumn(name = "branch_id")
     private Branch branch;
+
 
     @OneToMany(mappedBy = "inventory")
     private List<Product> products;

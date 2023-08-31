@@ -1,5 +1,6 @@
 package com.neto.bemcontrolado.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ public class Product {
     private Category category;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
