@@ -9,11 +9,13 @@ import com.neto.bemcontrolado.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @SpringBootApplication
+@EntityScan(basePackages = "com.neto.bemcontrolado.model")
 @RestController
 @RequestMapping("api/v1/inventory")
 @Service

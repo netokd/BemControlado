@@ -2,6 +2,7 @@ package com.neto.bemcontrolado.controller;
 
 import com.neto.bemcontrolado.model.Branch;
 import com.neto.bemcontrolado.model.Inventory;
+import com.neto.bemcontrolado.model.Product;
 import com.neto.bemcontrolado.repository.BranchRepository;
 import com.neto.bemcontrolado.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
@@ -52,6 +54,25 @@ public class InventoryContoller {
         inventoryRepository.save(inventory);
 
         return "redirect:/inventario";
+    }
+
+    @GetMapping("/inventario/{branchId}")
+    public String listInventoryProducts(@PathVariable Integer branchId, Model model){
+        // Obtenha a filial pelo ID
+        Branch branch = branchRepository.findById(branchId)
+                .orElseThrow(() -> new RuntimeException("Filial não encontrada"));
+
+        // Obtenha o inventário associado a essa filial (suponha que cada filial tenha apenas um inventário)
+        Inventory inventory = inventoryRepository.findByBranch(branch)
+                .orElseThrow(() -> new RuntimeException("Inventário não encontrado"));
+
+        // Obtenha a lista de produtos no inventário
+        List<Product> products = inventory.getProducts();
+
+        model.addAttribute("branch", branch);
+        model.addAttribute("productsList", products);
+
+        return "inventory/inventory-list"; // Crie uma página HTML Thymeleaf para exibir os produtos do inventário
     }
 }
 

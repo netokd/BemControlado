@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BemControlado</title>
+    <link rel="stylesheet" href="/css/styles-listar.css">
+</head>
+<body>
+<div th:include="fragments/header::header"></div>
+
+    <div class="div-tb-inventory">
+        <h1>Lista de Produtos do Inventário - Filial: <span th:text="${branch.name}"></span></h1>
+        <table id="category">
+            <tr >
+                <th>Nome do Produto</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Codigo Identificador</th>
+            </tr>
+            <tr th:each="product, iterStat : ${productsList}" th:class="${iterStat.even} ? 'even' : 'odd'">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.category.getName()}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.labelCode}"></td>
+            </tr>
+        </table>
+
+        <div>
+            <button class="add-button" ><a class="add-button" th:href="@{'/adicionar-produto?branchId=' + ${branch.id}}">Adicionar Produto</a></button>
+        </div>
+    </div>
+
+</body>
+</html>

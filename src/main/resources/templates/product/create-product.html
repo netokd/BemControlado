@@ -8,20 +8,28 @@
 <body>
 <h1>Adicionar Filial</h1>
 <div class="div-form">
-    <form onsubmit="addBranchJson(); return false;">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required><br>
 
-        <label for="address">Endereço:</label>
-        <input type="text" id="address" name="address" required><br>
+    <h1>Adicionar Produto</h1>
 
-        <label for="responsible">Responsavel:</label>
-        <input type="text" id="responsible" name="responsible" required><br>
+    <form th:action="@{/adicionar-produto}" th:object="${productForm}" method="post">
 
-        <label for="cnpj">CNPJ:</label>
-        <input type="text" id="cnpj" name="cnpj" required><br>
+        <label for="name">Nome do Produto:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
 
-        <button class="submit-button" type="button" onclick="addBranch()">Adicionar Filial</button>
+        <label for="description">Descrição:</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required>
+
+        <label for="labelCode">Código Identificador:</label>
+        <input type="text" id="labelCode" name="labelCode" th:field="*{labelCode}" required>
+
+        <label for="categoryId">Categoria:</label>
+        <select id="categoryId" name="categoryId" th:field="*{categoryId}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+
+        <input type="hidden" id="inventoryId" name="inventoryId" th:value="${branch.id}" />
+
+        <button type="submit">Salvar</button>
     </form>
 </div>
 
