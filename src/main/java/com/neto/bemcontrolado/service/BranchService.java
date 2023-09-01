@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import com.neto.bemcontrolado.service.InventoryService;
 import java.util.List;
 
 @SpringBootApplication
@@ -15,7 +15,11 @@ import java.util.List;
 public class BranchService {
 
     private final BranchRepository branchRepository;
-    public BranchService(BranchRepository branchRepository, BranchRepository branchRepository1){this.branchRepository = branchRepository;}
+    private final InventoryService inventoryService;
+    public BranchService(BranchRepository branchRepository, InventoryService inventoryService){
+        this.branchRepository = branchRepository;
+        this.inventoryService = inventoryService;
+    }
 
     public static void main(String[] args){ SpringApplication.run(BranchService.class, args); }
 
@@ -37,7 +41,11 @@ public class BranchService {
         branch.setResponsible(request.responsible);
         branch.setCnpj(request.cnpj);
         branchRepository.save(branch);
+        inventoryService.createInventoryForBranch(branch);
+
     }
+
+
 
     @DeleteMapping("{branchId}")
     public void deleteBranch(@PathVariable("branchId") Integer id){

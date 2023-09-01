@@ -9,17 +9,21 @@ import com.neto.bemcontrolado.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @SpringBootApplication
 @RestController
 @RequestMapping("api/v1/inventory")
+@Service
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
     private final BranchRepository branchRepository;
     private final ProductRepository productRepository;
+
+
 
 
     public static class NewInventoryRequest{
@@ -70,6 +74,14 @@ public class InventoryService {
         Inventory inventory = new Inventory();
         inventory.setBranch(branch);
         inventory.setProducts(productId);
+
+        inventoryRepository.save(inventory);
+    }
+
+    public void createInventoryForBranch(Branch branch) {
+        Inventory inventory = new Inventory();
+
+        inventory.setBranch(branch);
 
         inventoryRepository.save(inventory);
     }
