@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Filial</title>
+    <link   rel="stylesheet" href="/css/styles-create.css">
+</head>
+<body>
+<h1>Adicionar Filial</h1>
+<div class="div-form">
+
+    <h1>Adicionar Produto</h1>
+
+    <form th:object="${product}" th:action="@{/atualizar-produto/{productId}(productId=${product.id})}" method="post">
+
+        <label for="name">Nome do Produto:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
+
+        <label for="description">Descrição:</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required>
+
+        <label for="labelCode">Código Identificador:</label>
+        <input type="text" id="labelCode" name="labelCode" th:field="*{labelCode}" required>
+
+        <label for="categoryId">Categoria:</label>
+        <select id="categoryId" name="categoryId" th:field="*{category.id}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                    th:selected="${category.id == product.category.id}"></option>
+        </select>
+
+        <input type="hidden" id="inventoryId" name="inventoryId" th:value="${branch.id}" />
+
+        <button type="submit">Salvar</button>
+    </form>
+</div>
+
+<script>
+    function addBranch() {
+        var name = document.getElementById('name').value;
+        var address = document.getElementById('address').value;
+        var responsible = (document.getElementById('responsible').value); // Certifique-se de converter para um número inteiro
+        var cnpj = document.getElementById('cnpj').value;
+
+        var customer = {
+            name: name,
+            address: address,
+            responsible: responsible,
+            cnpj: cnpj
+        };
+
+        fetch('/api/v1/branch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(customer)
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/filial'; // Redireciona para a página de listagem
+                }
+            })
+            .catch(error => console.error('Erro ao adicionar Filial', error));
+    }
+</script>
+
+</body>
+</html>

@@ -84,6 +84,48 @@ public class ProductController {
         }
 
     }
+    @PostMapping("/atualizar-produto/{productId}")
+    public String updateProduct(@PathVariable Integer productId, @ModelAttribute Product updateProduct){
+        // Busque o cliente existente pelo ID
+        Product existingProduct = productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        // Atualize os dados do cliente existente com os dados do formulário
+        existingProduct.setName(updateProduct.getName());
+        Inventory inventory = existingProduct.getInventory();
+        // Salve as atualizações no banco de dados
+        productRepository.save(existingProduct);
+
+        return "redirect:/inventario/" + inventory.getId(); // Redirecione para a página de listagem após a atualização
+    }
+
+    @GetMapping("/atualizar-produto/{productId}")
+    public String editProductForm(@PathVariable Integer productId, Model model) {
+        try {
+            // Busque o produto pelo ID
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+            // Recupere o Inventory associado ao produto
+            Inventory inventory = product.getInventory();
+
+            // Recupere o Branch associado ao Inventory
+            Branch branch = inventory.getBranch();
+
+            // Busque todas as categorias disponíveis
+            List<Category> categories = categoryRepository.findAll();
+
+            // Adicione o produto, o branch e as categorias ao modelo
+            model.addAttribute("product", product);
+            model.addAttribute("branch", branch);
+            model.addAttribute("categories", categories);
+
+            return "product/update-product";
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Lança a exceção novamente para que o Spring possa tratá-la
+        }
+    }
 
 
 
