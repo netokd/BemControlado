@@ -27,4 +27,6 @@ gerar uma identidade visual, com cores etc e apliquei, o foco do frontend
 nesse projeto foi so para visualizar e praticar os cruds, onde tambem
 deve futuramente estudar mais afundo, algum framework para fazer as telas.
 
+Ainda sobre o frontend, devo atualizar futuramente um pouco a parte visual
+melhorando o menu onde retirarei a opção home e de inventario.
 
