@@ -4,6 +4,7 @@ package com.neto.bemcontrolado.service;
 import com.neto.bemcontrolado.model.Category;
 import com.neto.bemcontrolado.model.Inventory;
 import com.neto.bemcontrolado.model.Product;
+import com.neto.bemcontrolado.modelos.AddProductForm;
 import com.neto.bemcontrolado.repository.CategoryRepository;
 import com.neto.bemcontrolado.repository.InventoryRepository;
 import com.neto.bemcontrolado.repository.ProductRepository;
@@ -64,6 +65,30 @@ public class ProductService {
         product.setInventory(inventory);
 
         productRepository.save(product);
+    }
+
+    @PostMapping("/add-form")
+    public Integer addProduct(@ModelAttribute AddProductForm productForm) {
+        // Recupere o ID do inventário a partir do formulário
+        Integer inventoryId = productForm.getInventoryId();
+
+        // Obtenha o inventário com base no ID (você precisará injetar o repositório do inventário)
+        Inventory inventory = inventoryRepository.findById(inventoryId)
+                .orElseThrow(() -> new RuntimeException("Inventário não encontrado"));
+
+        // Crie uma nova instância de produto e associe ao inventário
+        Product product = new Product();
+        product.setName(productForm.getName());
+        product.setDescription(productForm.getDescription());
+        product.setLabelCode(productForm.getLabelCode());
+        product.setCategory(categoryRepository.findById(productForm.getCategoryId())
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada")));
+        product.setInventory(inventory);
+
+        // Salve o produto no banco de dados
+        productRepository.save(product);
+
+        return inventoryId; // Redirecionar para a página de sucesso
     }
 
 }

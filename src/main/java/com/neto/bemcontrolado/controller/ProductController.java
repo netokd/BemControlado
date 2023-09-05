@@ -24,7 +24,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository; // Repositório de Categorias
-
+    @Autowired
+    private ProductService productService;
     @Autowired
     private InventoryRepository inventoryRepository; // Repositório de Inventários
     @Autowired
@@ -51,28 +52,15 @@ public class ProductController {
 
         return "product/create-product";
     }
-
     @PostMapping("/adicionar-produto")
     public String addProduct(@ModelAttribute AddProductForm productForm) {
-        // Recupere o ID do inventário a partir do formulário
-        Integer inventoryId = productForm.getInventoryId();
+        // Use o ProductService para adicionar o produto
+        productService.addProduct(productForm);
 
-        // Obtenha o inventário com base no ID (você precisará injetar o repositório do inventário)
-        Inventory inventory = inventoryRepository.findById(inventoryId)
-                .orElseThrow(() -> new RuntimeException("Inventário não encontrado"));
-
-        // Crie uma nova instância de produto e associe ao inventário
-        Product product = new Product();
-        product.setName(productForm.getName());
-        product.setDescription(productForm.getDescription());
-        product.setLabelCode(productForm.getLabelCode());
-        product.setCategory(categoryRepository.findById(productForm.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada")));
-        product.setInventory(inventory);
-
-        // Salve o produto no banco de dados
-        productRepository.save(product);
-
-        return "redirect:/inventario/" + inventoryId; // Redirecionar para a página de sucesso
+        // Redirecione para a página de sucesso
+        return "redirect:/inventario/" + productForm.getInventoryId();
     }
+
+
+
 }
