@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>BemControlado</title>
     <link rel="stylesheet" href="/css/styles-listar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div th:include="fragments/header::header"></div>
@@ -16,12 +17,21 @@
                 <th>Categoria</th>
                 <th>Descrição</th>
                 <th>Codigo Identificador</th>
+                <th>Ações</th>
             </tr>
             <tr th:each="product, iterStat : ${productsList}" th:class="${iterStat.even} ? 'even' : 'odd'">
                 <td th:text="${product.name}"></td>
                 <td th:text="${product.category.getName()}"></td>
                 <td th:text="${product.description}"></td>
                 <td th:text="${product.labelCode}"></td>
+                <td>
+                    <a class="action-link" th:href="@{/atualizar-produto/{productId}(productId=${product.id})}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a class="action-link" th:href="@{/excluir-produto/{productId}(productId=${product.id}, inventoryId=${branch.id})}" onclick="return confirm('Tem certeza que deseja excluir?')">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
             </tr>
         </table>
 

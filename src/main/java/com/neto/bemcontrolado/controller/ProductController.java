@@ -11,12 +11,12 @@ import com.neto.bemcontrolado.repository.InventoryRepository;
 import com.neto.bemcontrolado.repository.ProductRepository;
 import com.neto.bemcontrolado.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -59,6 +59,30 @@ public class ProductController {
 
         // Redirecione para a página de sucesso
         return "redirect:/inventario/" + productForm.getInventoryId();
+    }
+
+    @GetMapping("/excluir-produto/{productId}")
+    public String deleteProduct(@PathVariable Integer productId,@RequestParam Integer inventoryId, RestTemplate restTemplate ){
+        try{
+            ResponseEntity<Void> responseEntity = restTemplate.exchange(
+                    "http://localhost:8080/api/v1/product/" + productId,
+                    HttpMethod.DELETE,
+                    null,
+                    Void.class
+            );
+            if(responseEntity.getStatusCode().is2xxSuccessful()){
+                return "redirect:/inventario/" + inventoryId;
+            }
+            else {
+                // Trate o erro de exclusão de alguma forma, por exemplo, exibindo uma mensagem de erro
+                return "error"; // Ou qualquer outra página de erro que você queira mostrar
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            // Trate a exceção de forma apropriada, você pode mostrar uma mensagem de erro ou fazer algo mais
+            return "error"; // Ou qualquer outra página de erro que você queira mostrar
+        }
+
     }
 
 

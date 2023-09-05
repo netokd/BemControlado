@@ -90,5 +90,9 @@ public class ProductService {
 
         return inventoryId; // Redirecionar para a página de sucesso
     }
+    @DeleteMapping("{productId}")
+    public void deleteProduct(@PathVariable ("productId") Integer id){
+            productRepository.deleteById(id);
+    }
 
 }
